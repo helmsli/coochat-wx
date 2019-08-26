@@ -1,0 +1,40 @@
+
+平台管理员、盟主、俱乐部主、俱乐部代理、用户 间的转赠
+172.18.10.74:9003/account/transferBalance		post
+{
+    "fromUserId":"10101001",	转钱人的userId
+    "toUserId":"10101",			收钱人的userId
+    "money":100,				金额
+    "signInfo":"test",			不能为空 默认test
+    "reqTime":"2018-8-3 11:05:05"
+}
+
+系统转给平台管理员
+1. 获取sign   120s后失效
+localhost:9003/account/getSignInfo  post
+{
+    "fromUserId":"27925685",
+    "toUserId":"22655057",
+    "money":10000
+}
+2. 带上sign给平台管理员转赠
+172.18.10.74:9003/account/transferBalanceSysToUser		post
+{
+    "fromUserId":"00000000",	系统管理员userId
+    "toUserId":"22651633",		盟主userId
+    "money":6000000,			金额
+    "signInfo":"d685020dc11e96926258ec1d4c146a21"		1步骤中返回的sign
+}
+
+
+
+
+平台管理员转给系统
+172.18.10.74:9003/account/transferBalanceUserToSys		post
+{
+    "fromUserId":"101",			盟主userId
+    "toUserId":"100",			系统管理员userId
+    "money":1000,				金额
+    "signInfo":"test",			不能为空 默认test
+    "reqTime":"2018-8-3 11:05:05"
+}

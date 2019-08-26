@@ -1,0 +1,63 @@
+平台的下线是联盟
+ 保存在UserRoleRelation中的数据为
+   userId：盟主的userid
+   parentid:00000000
+   角色ID:role_Union_Owner
+   unionId：联盟的id
+   clubId:00000000
+ 
+ 
+ 联盟的下线是俱乐部
+ 保存在UserRoleRelation中的数据为
+   userId：俱乐部主的userid
+   parentid:盟主的userid
+   角色ID:role_Club_Owner
+   unionId：联盟的id
+   clubId:俱乐部主创建的俱乐部ID
+ 俱乐部主介绍的是用户
+      userId：用户的userid
+       parentid:俱乐部主的userId
+      角色ID:role_Clubuser
+       unionId：联盟的id
+       clubId:俱乐部主创建的俱乐部ID
+  俱乐部主介绍的是代理，提升来的，不是注册来的
+      userId：代理的userid
+       parentid:俱乐部主的userId
+      角色ID:role_agent
+       unionId：联盟的id
+       clubId:俱乐部主创建的俱乐部ID	   
+	   
+	   
+  代理介绍的是用户
+      userId：用户的userid
+       parentid:代理的userid
+      角色ID:role_user
+       unionId：联盟的id
+       clubId:俱乐部主创建的俱乐部ID	   
+	普通用户(非代理介绍的用户)在这个表中没有数据  
+   	   
+	
+
+
+RoleInfo
+    根据userId更新对应的角色和userID
+    普通用户在这个表中没有数据
+新注册的用户，推荐人是俱乐部主：
+ 设置 俱乐部主介绍的是用户
+      userId：用户的userid
+       parentid:俱乐部主的userId
+      角色ID:role_Clubuser
+       unionId：联盟的id
+       clubId:俱乐部主创建的俱乐部ID	
+
+
+俱乐部主将普通用户提升为代理
+    	
+	   RoleInfo 标示这个用户是代理
+	   UserRoleRelation设置下线为该代理  ，需要将该该用户的角色修改role_agent，设置反水比例。别的数据不动；  
+		      俱乐部主介绍的是代理
+		             userId：代理的userid
+		             parentid:俱乐部主的userid
+		             角色ID:role_agent
+		              unionId：联盟的id
+		              clubId:俱乐部主创建的俱乐部ID

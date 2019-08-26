@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper	namespace="com.company.cooChatWx.mapper.ReceiveMoneyQrCodeMapper">
+	<resultMap id="BaseResultMap" type="com.company.cooChatWx.domain.ReceiveMoneyQrCode">
+		<result column="userId" property="userId" jdbcType="VARCHAR" />
+		<result column="talker" property="talker" jdbcType="VARCHAR" />
+		<result column="amount" property="amount" jdbcType="VARCHAR" />  
+	    <result column="currency" property="currency" jdbcType="VARCHAR" />
+	    <result column="remark" property="remark" jdbcType="VARCHAR" />	    
+	    <result column="url" property="url" jdbcType="VARCHAR" />
+	    <result column="status" property="status" jdbcType="INTEGER" /> 
+	    <result column="sign" property="sign" jdbcType="VARCHAR" />		   
+	    <result column="expireTime" property="expireTime" jdbcType="TIMESTAMP" />
+	    <result column="rType" property="rType" jdbcType="INTEGER" /> 
+	      
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		userId, talker,amount,currency,remark, url, status,sign,expireTime,rType
+	</sql>
+
+	<insert id="insert"	parameterType="com.company.cooChatWx.domain.ReceiveMoneyQrCode">
+		insert into receiveMoneyQrCode (userId, talker,amount,currency,remark, url, status,sign,expireTime,rType)
+		values (#{userId,jdbcType=VARCHAR},#{talker,jdbcType=VARCHAR}, #{amount,jdbcType=VARCHAR},#{currency,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},#{url,jdbcType=VARCHAR},#{status,jdbcType=INTEGER},#{sign,jdbcType=VARCHAR},#{expireTime,jdbcType=TIMESTAMP},#{rType,jdbcType=INTEGER})
+	</insert>
+	<update id="updateReceiveMonByRemarAndTalk"
+		parameterType="com.company.cooChatWx.domain.ReceiveMoneyQrCode">
+		update receiveMoneyQrCode
+		set
+		userId= #{userId,jdbcType=VARCHAR},			
+		amount =#{amount,jdbcType=VARCHAR},
+		currency =#{currency,jdbcType=VARCHAR},		
+		url =#{url,jdbcType=VARCHAR},
+		status =#{status,jdbcType=INTEGER},
+		sign =#{sign,jdbcType=VARCHAR},
+		expireTime =#{expireTime,jdbcType=TIMESTAMP},
+		rType =#{rType,jdbcType=INTEGER}	    
+		where remark = #{remark,jdbcType=VARCHAR}
+		and  talker = #{talker,jdbcType=VARCHAR}			
+	</update>
+	
+	<update id="updateReceiveMonByRemark"
+		parameterType="com.company.cooChatWx.domain.ReceiveMoneyQrCode">
+		update receiveMoneyQrCode
+		set
+		userId =#{userId,jdbcType=VARCHAR},		
+		amount =#{amount,jdbcType=VARCHAR},
+		talker =#{talker,jdbcType=VARCHAR},	
+		currency =#{currency,jdbcType=VARCHAR},		
+		url =#{url,jdbcType=VARCHAR},
+		status =#{status,jdbcType=INTEGER},
+		sign =#{sign,jdbcType=VARCHAR},
+		expireTime =#{expireTime,jdbcType=TIMESTAMP},
+		rType =#{rType,jdbcType=INTEGER}	    
+		where remark = #{remark,jdbcType=VARCHAR}				
+	</update>
+	
+	<update id="updateStatusMonByRemarTalk"
+		parameterType="com.company.cooChatWx.domain.ReceiveMoneyQrCode">
+		update receiveMoneyQrCode
+		set	
+		status =#{status,jdbcType=INTEGER}		    
+		where remark = #{remark,jdbcType=VARCHAR}
+		and  talker = #{talker,jdbcType=VARCHAR}				
+	</update>
+		
+	<select id="queryReceiveMoneyByAmoutAndStatus" resultMap="BaseResultMap">
+		select *
+		from receiveMoneyQrCode
+		where  amount = #{amount,jdbcType=VARCHAR}
+		and status = #{status,jdbcType=INTEGER}	       
+	</select>
+	
+	<select id="queryReceiveMoneyByRemark" resultMap="BaseResultMap">
+		select *
+		from receiveMoneyQrCode
+		where  remark = #{remark,jdbcType=VARCHAR}	      
+	</select>
+
+			
+	
+</mapper>

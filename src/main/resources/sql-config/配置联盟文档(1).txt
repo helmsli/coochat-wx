@@ -1,0 +1,38 @@
+https://coojisudev.cootel.com/coojisu/allianceLeader.html   注册网址
+
+1.在数据库user_dbcloud表userorder中配置
+   category：roleInfo，
+   userId：该盟主的userId,
+   orderId：00000000,
+   时间：ConstCreateTime，
+   订单状态：0，
+   orderData：RoleInfo的一条记录。
+2.在数据库user_dbcloud表userorder中配置
+    category：inviteCode，
+	userId：该盟主的userId,
+	orderId：00000000,
+	时间：ConstCreateTime，
+	订单状态：0，
+    orderData：CodeDomain（其中有两个字段userId:该盟主的userId,inviteCode：四位唯一的邀请码）的一条记录。
+3.在数据库user_dbcloud表userorder中配置
+   category：inviteCodeInfo，
+   userId：四位唯一的邀请码,
+   orderId：00000000,
+   时间：ConstCreateTime，
+   订单状态：0，
+   orderData：CodeDomain（其中有两个字段userId:该盟主的userId,inviteCode：四位唯一的邀请码）的一条记录。
+4.在数据库user_dbcloud表user_role_relation中配置
+   useId：该盟主的useId，
+   parentId：00000000，
+   roleId：100，
+   rate：9000，
+   insuranceRate：9000，
+   clubId：00000000，
+   unionId：联盟的id
+ 5.在数据库user_dbcloud表depuuserinfo中更新
+   该用户的
+    roleId:100,
+	clubId：00000000，
+	unionId：联盟的id
+ 
+   
